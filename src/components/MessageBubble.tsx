@@ -14,19 +14,25 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+      initial={{ opacity: 0, y: 15, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ type: 'spring', stiffness: 250, damping: 25 }}
       className={cn(
-        "flex w-full",
+        "flex w-full gap-3",
         isUser ? "justify-end" : "justify-start"
       )}
     >
+      {!isUser && (
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-100 to-orange-200 border border-orange-300 flex-shrink-0 flex items-center justify-center mt-auto mb-1 shadow-sm">
+          <span className="text-sm font-black text-orange-600">AI</span>
+        </div>
+      )}
       <div 
         className={cn(
           "max-w-[85%] md:max-w-[75%] p-4 shadow-sm relative overflow-hidden",
           isUser 
-            ? "bg-[#111111] text-white rounded-3xl rounded-br-sm" 
-            : "bg-white border border-[#EFEFEA] text-[#111111] rounded-3xl rounded-bl-sm"
+            ? "bg-[#111111] text-white rounded-3xl rounded-br-sm shadow-md" 
+            : "bg-white border border-[#EFEFEA] text-[#111111] rounded-3xl rounded-bl-sm shadow-sm"
         )}
       >
         <div className={cn("markdown-body leading-relaxed text-[15px]", isUser && "text-white prose-invert")}>

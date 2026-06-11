@@ -15,7 +15,7 @@ interface ChatState {
 export const useChatStore = create<ChatState>((set, get) => ({
   messages: [],
   isTyping: false,
-  personalityMode: 'Best Friend',
+  personalityMode: 'Auto',
   
   addMessage: (message) => set((state) => ({ messages: [...state.messages, message] })),
   
@@ -30,6 +30,6 @@ export const useChatStore = create<ChatState>((set, get) => ({
   setIsTyping: (isTyping) => set({ isTyping }),
   
   setPersonalityMode: (mode) => set({ personalityMode: mode }),
-  
+
   clearChat: () => set({ messages: [] })
 }));

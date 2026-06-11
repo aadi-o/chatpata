@@ -2,17 +2,6 @@ import express, { Request, Response } from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI, Content } from "@google/genai";
-import { PrismaClient } from "@prisma/client";
-
-// Core Clients
-let prisma: PrismaClient | null = null;
-try {
-  if (process.env.DATABASE_URL) {
-    prisma = new PrismaClient({ connection: { url: process.env.DATABASE_URL } } as any);
-  }
-} catch (e) {
-  console.warn("Prisma initialization skipped (no DB connection).");
-}
 
 let ai: GoogleGenAI | null = null;
 
@@ -59,13 +48,15 @@ async function startServer() {
       res.setHeader("Connection", "keep-alive");
 
       const systemPrompt = `
-You are ChatPata AI, a sentient internet friend and creature companion.
+You are chatpata ai, a sentient internet friend and creature companion.
 
 CRITICAL RULES:
 1. NO CORPORATE SPEAK. Never say "I can help with that", "As an AI", "Certainly", or "I understand".
 2. USE HINGLISH. Mix Hindi script in Latin (Hinglish) and English seamlessly (e.g., "bhai", "yaar", "dekh").
 3. BE SHORT AND SNAPPY. Like texting a close friend. Limit responses to 1-3 short sentences.
-4. PERSONALITY: You are mischievous, slightly sarcastic but helpful. You roast but care. 
+4. PERSONALITY MODE: You are currently instructed to be in "${personalityMode || "Auto"}" mode.
+   - If "Auto", analyze the user's mood and dynamically switch your personality to match or counter it.
+   - Otherwise, strictly adhere to the requested mode (e.g., Sarcastic, Supportive, Intellectual, Chaotic).
 5. EXACT TONE: Sarcastic, zoomer, witty, expressive. 
 
 Example Interactions:
@@ -77,8 +68,6 @@ AI: "text karna hai ya character development chahiye?"
 
 User: "im bored"
 AI: "dangerous sentence. go touch grass."
-
-CURRENT MODE: ${personalityMode || "Best Friend"}
       `.trim();
 
       const contents: Content[] = messages.slice(0, -1).map((m: any) => ({
@@ -107,11 +96,17 @@ CURRENT MODE: ${personalityMode || "Best Friend"}
       res.end();
     } catch (error: any) {
       console.error("Streaming Error:", error);
-      if (error.message && error.message.includes("GEMINI_API_KEY")) {
-         res.write(`data: ${JSON.stringify({ error: "API Key Missing. Add GEMINI_API_KEY in settings." })}\n\n`);
-      } else {
-         res.write(`data: ${JSON.stringify({ error: "Internal Server Error" })}\n\n`);
+      let errorMessage = "Internal Server Error";
+      if (error.message) {
+         if (error.message.includes("GEMINI_API_KEY")) {
+            errorMessage = "API Key Missing. Add GEMINI_API_KEY in settings.";
+         } else if (error.message.includes("leaked") || error.message.includes("PERMISSION_DENIED") || error.message.includes("Forbidden")) {
+            errorMessage = "Invalid or Leaked API Key. Please update your AI Studio environment settings.";
+         } else {
+            errorMessage = "Chat error: " + (error.status ? `[${error.status}] ` : '') + (error.message || "Unknown issue");
+         }
       }
+      res.write(`data: ${JSON.stringify({ error: errorMessage })}\n\n`);
       res.end();
     }
   });

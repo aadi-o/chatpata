@@ -15,42 +15,48 @@ export const LandingPage: React.FC<{ onLaunch: () => void }> = ({ onLaunch }) =>
           </span>
         </div>
         <div className="hidden md:flex gap-10 text-sm font-medium opacity-60 uppercase tracking-widest">
-          <a href="#" className="hover:opacity-100 transition-opacity">The Creature</a>
-          <a href="#" className="hover:opacity-100 transition-opacity">How it Works</a>
         </div>
         <button 
            onClick={onLaunch}
-           className="px-6 py-2 bg-[#111111] text-white rounded-full text-sm font-bold shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all"
+           className="px-6 py-2 bg-orange-500 text-white rounded-full text-sm font-bold shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all animate-pulse"
         >
-          Launch App
+          Adopt Now
         </button>
       </nav>
 
       {/* Main Hero Content */}
       <main className="flex-1 flex flex-col lg:flex-row px-6 md:px-12 relative items-center justify-center lg:justify-between pb-12 lg:pb-0 z-10 max-w-[1600px] mx-auto w-full">
         {/* Left Side: Editorial Content */}
-        <div className="flex flex-col justify-center lg:pr-12 lg:w-1/2 pt-8 lg:pt-0">
-          <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#EFEFEA] rounded-full shadow-sm w-fit">
+        <div className="flex flex-col justify-center items-center lg:items-start lg:pr-12 lg:w-1/2 pt-4 sm:pt-8 lg:pt-0 text-center lg:text-left">
+          <div className="mb-4 sm:mb-6 inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#EFEFEA] rounded-full shadow-sm w-fit">
             <span className="flex h-2 w-2 rounded-full bg-green-400 animate-pulse"></span>
-            <span className="text-[10px] uppercase font-bold tracking-tighter">Live: Version 2.0 “The Friend Update”</span>
+            <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-tighter">Live: Version 2.0 “The Friend Update”</span>
           </div>
-          <h1 className="text-6xl md:text-[80px] lg:text-[112px] leading-[0.95] md:leading-[0.85] font-bold tracking-tighter mb-8 max-w-2xl">
-            AI That<br />Actually Feels<br /><span className="text-blue-600 italic">Human.</span>
+          <h1 className="text-5xl sm:text-6xl md:text-[80px] lg:text-[112px] leading-[1.05] md:leading-[0.85] font-bold tracking-tighter mb-6 md:mb-8 max-w-2xl">
+            AI That<br />Actually Feels<br /><span className="text-orange-600 italic">Alive.</span>
           </h1>
-          <p className="text-xl md:text-2xl text-[#111111] opacity-70 leading-relaxed max-w-md font-medium">
+          <p className="text-lg sm:text-xl md:text-2xl text-[#111111] opacity-70 leading-relaxed max-w-md font-medium px-4 lg:px-0">
             Short replies. Hinglish. Smart conversations. <span className="font-bold text-[#111111] opacity-100 italic">Zero corporate nonsense.</span>
           </p>
           
-          <div className="mt-8 md:mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <button 
-              onClick={onLaunch}
-              className="px-10 py-5 bg-[#111111] text-white rounded-2xl font-bold text-lg shadow-xl hover:-translate-y-1 hover:shadow-2xl transition-all active:scale-95"
-            >
-              Adopt Your Companion
-            </button>
-            <div className="flex flex-col">
-              <span className="text-xs font-bold uppercase opacity-40 tracking-wider">Current Status</span>
-              <span className="font-serif italic text-lg text-orange-600">“Feeling mischief today”</span>
+          <div className="mt-6 sm:mt-8 md:mt-12 flex flex-col items-center lg:items-start gap-4 w-full">
+            <div className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-orange-600 animate-pulse flex items-center gap-2 relative">
+               <div className="w-1.5 h-1.5 rounded-full bg-orange-600"></div>
+               Warning: Highly unpredictable personality inside
+            </div>
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 relative w-full sm:w-auto px-4 lg:px-0">
+              <button 
+                onClick={onLaunch}
+                className="group relative px-6 sm:px-10 py-4 sm:py-5 bg-[#111111] text-white rounded-2xl font-bold text-lg sm:text-xl shadow-xl hover:-translate-y-1 hover:shadow-2xl transition-all active:scale-95 overflow-hidden w-full sm:w-auto text-center"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                   Adopt Your Companion 🧸
+                </span>
+              </button>
+              <div className="text-xs sm:text-sm font-medium text-gray-500 max-w-[200px] leading-tight text-center sm:text-left">
+                (Clicking this might be the best or worst decision of your day)
+              </div>
             </div>
           </div>
         </div>
@@ -99,25 +105,40 @@ export const LandingPage: React.FC<{ onLaunch: () => void }> = ({ onLaunch }) =>
       </main>
 
       {/* Bottom Bar: Feature Highlights */}
-      <footer className="px-6 md:px-12 py-8 border-t border-[#EFEFEA] flex flex-col md:flex-row justify-between items-center bg-white/80 backdrop-blur-md gap-6 md:gap-0 z-20 mt-auto">
-        <div className="flex flex-wrap md:flex-nowrap justify-center md:justify-start gap-8 lg:gap-20">
+      <footer className="px-6 md:px-12 py-8 border-t border-[#EFEFEA] flex flex-col md:flex-row justify-between flex-wrap gap-8 items-center bg-white/80 backdrop-blur-md z-20 mt-auto w-full">
+        <div className="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-8 lg:gap-12">
           <div className="flex flex-col">
             <span className="text-[10px] uppercase font-bold tracking-widest text-[#111111] opacity-40 mb-1">Architecture</span>
-            <span className="text-base lg:text-xl font-serif text-[#111111]">Gemini 2.5 Flash</span>
+            <span className="text-sm lg:text-base font-serif text-[#111111] font-medium">Gemini 2.5</span>
           </div>
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase font-bold tracking-widest text-[#111111] opacity-40 mb-1">Vibe Check</span>
-            <span className="text-base lg:text-xl font-serif text-[#111111]">98% Corporate Free</span>
+            <span className="text-[10px] uppercase font-bold tracking-widest text-[#111111] opacity-40 mb-1">Stack</span>
+            <span className="text-sm lg:text-base font-serif text-[#111111] font-medium">React • Tailwind • Express</span>
           </div>
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase font-bold tracking-widest text-[#111111] opacity-40 mb-1">Language</span>
-            <span className="text-base lg:text-xl font-serif text-[#111111]">Fluent in Hinglish</span>
+            <span className="text-[10px] uppercase font-bold tracking-widest text-[#111111] opacity-40 mb-1">Hosted on</span>
+            <span className="text-sm lg:text-base font-serif text-[#111111] font-medium">Railway 🚂</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-[#111111] opacity-40 mb-1">Version</span>
+            <span className="text-sm lg:text-base font-serif text-[#111111] font-medium">2.0.0</span>
           </div>
         </div>
-        <div className="flex gap-4">
-           <div className="text-sm font-bold opacity-40 uppercase tracking-widest flex items-center">
-             Made with AI Studio
-           </div>
+        
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <a href="http://github.com/aadi-o" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#EFEFEA] hover:bg-gray-50 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 9 18v4"></path></svg>
+            <span className="text-sm font-bold opacity-80">Source Code</span>
+          </a>
+          <div className="flex items-center gap-4 bg-orange-50 px-4 py-2 rounded-full border border-orange-100/50 shadow-sm">
+             <div className="text-[10px] sm:text-xs font-bold opacity-60 uppercase tracking-widest">
+               Built by
+             </div>
+             <div className="flex items-center gap-2">
+               <img src="https://robohash.org/aadi.png?set=set4&bgset=bg1" alt="Aadi cat profile" className="w-8 h-8 rounded-full border border-orange-200 bg-white" />
+               <span className="font-bold text-orange-800 text-sm">Aadi</span>
+             </div>
+          </div>
         </div>
       </footer>
 

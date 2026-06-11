@@ -13,7 +13,7 @@ export function useChat() {
 
     setError(null);
     const userMsg: Message = {
-      id: Date.now().toString(),
+      id: 'usr-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 9),
       role: 'USER',
       content,
       createdAt: new Date(),
@@ -46,7 +46,7 @@ export function useChat() {
       if (!reader) throw new Error('No reader available');
 
       const aiMsg: Message = {
-        id: (Date.now() + 1).toString(),
+        id: 'ai-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 9),
         role: 'AI',
         content: '',
         createdAt: new Date(),

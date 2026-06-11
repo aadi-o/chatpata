@@ -1,5 +1,5 @@
 FROM node:22-alpine AS builder
-# Install necessary build tools for Prisma and native dependencies
+# Install necessary build tools
 RUN apk add --no-cache openssl1.1-compat build-base python3
 
 WORKDIR /app
@@ -9,13 +9,11 @@ COPY package.json package-lock.json* ./
 RUN npm ci
 
 COPY . .
-# Generate prisma client
-RUN npx prisma generate
 # Build frontend and backend
 RUN npm run build
 
 FROM node:22-alpine AS runner
-# Install sqlite or openssl if required by prisma in runtime
+# Install runtime deps
 RUN apk add --no-cache openssl
 
 WORKDIR /app
@@ -27,7 +25,6 @@ COPY --from=builder /app/package.json ./
 # Only install production dependencies
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/prisma ./prisma
 
 EXPOSE 3000
 
