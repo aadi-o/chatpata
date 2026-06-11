@@ -1,6 +1,6 @@
 FROM node:22-alpine AS builder
 # Install necessary build tools
-RUN apk add --no-cache openssl1.1-compat build-base python3
+RUN apk add --no-cache build-base python3
 
 WORKDIR /app
 
