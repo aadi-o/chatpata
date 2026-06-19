@@ -210,12 +210,12 @@ export const ChatLayout: React.FC<{ onBack: () => void }> = ({ onBack }) => {
              </div>
 
              {/* Creature Header (Mobile) */}
-             <div className="md:hidden flex flex-col items-center justify-center bg-white/20 backdrop-blur-xl pt-4 pb-2 border-b border-white/30 z-20 shadow-sm relative overflow-hidden">
-                 <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#d1d5db 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
-                 <div className="scale-[0.55] origin-center -my-10 hover:scale-[0.6] transition-transform duration-300 relative z-10">
+             <div className="md:hidden flex flex-col items-center justify-center bg-white/25 backdrop-blur-xl pt-5 pb-3 border-b border-white/30 z-20 shadow-sm relative overflow-visible">
+                 <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden" style={{ backgroundImage: 'radial-gradient(#d1d5db 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
+                 <div className="scale-[0.65] origin-center -my-9 hover:scale-[0.7] transition-transform duration-300 relative z-10 overflow-visible">
                      <Creature />
                  </div>
-                 <div className="text-[10px] uppercase font-bold tracking-widest text-orange-600 mt-2 bg-orange-100/80 px-3 py-1 rounded-full border border-orange-200 relative z-10">
+                 <div className="text-[10px] uppercase font-bold tracking-widest text-orange-600 mt-2 bg-orange-100/90 px-3 py-1 rounded-full border border-orange-200 relative z-10 shadow-sm">
                     {personalityMode === 'Auto' ? 'Autopilot Active' : `${personalityMode} Mode`}
                  </div>
              </div>
@@ -257,6 +257,33 @@ export const ChatLayout: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
                {/* Input Area */}
                <div className="w-full p-3 md:p-8 z-20 bg-white/30 backdrop-blur-2xl pb-4 sm:pb-6 md:pb-8 border-t border-white/40 shadow-[0_-10px_40px_rgba(0,0,0,0.02)]">
+                  {/* Realistic Typing Indicator directly above the chat input */}
+                  <AnimatePresence>
+                    {isTyping && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 5, scale: 0.95 }}
+                        className="max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto w-full mb-3 flex items-center justify-start px-2"
+                      >
+                        <div className="flex items-center gap-2.5 px-4 py-2 bg-gradient-to-r from-orange-500/10 to-transparent border border-orange-500/15 rounded-2xl shadow-sm backdrop-blur-md">
+                          <div className="flex gap-1 items-center shrink-0">
+                            <span className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
+                            <span className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
+                            <span className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-bounce" />
+                          </div>
+                          <span className="text-xs font-bold text-orange-700 tracking-wide animate-pulse">
+                            {personalityMode === 'Sarcastic' && "NIG AI is drafting some toxic sarcasm... 😏💅"}
+                            {personalityMode === 'Chaotic' && "NIG AI is cooking crazy unhinged logic... 💀💥"}
+                            {personalityMode === 'Supportive' && "NIG AI is crafting some abusive brotherly advice... 🤝😭"}
+                            {personalityMode === 'Intellectual' && "NIG AI is compiling high-brain tech-slams... 🤡🧠"}
+                            {personalityMode === 'Auto' && "NIG AI is preparing a brutal response... 💀🤫"}
+                          </span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
                  <form onSubmit={handleSubmit} className="relative group max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto w-full">
                     <input
                        type="text"

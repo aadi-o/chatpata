@@ -37,7 +37,7 @@ export const LandingPage: React.FC<{ onLaunch: () => void }> = ({ onLaunch }) =>
             <span className="flex h-2 w-2 rounded-full bg-green-400 animate-pulse"></span>
             <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-tighter">Live: Version 2.0 “The Friend Update”</span>
           </div>
-          <h1 className="text-5xl sm:text-6xl md:text-[80px] lg:text-[112px] xl:text-[130px] leading-[1.05] md:leading-[0.85] xl:leading-[0.85] font-bold tracking-tighter mb-6 md:mb-8 max-w-2xl xl:max-w-3xl">
+          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-[80px] lg:text-[112px] xl:text-[130px] leading-[1.05] md:leading-[0.85] xl:leading-[0.85] font-bold tracking-tighter mb-6 md:mb-8 max-w-2xl xl:max-w-3xl">
             AI That<br />Actually Feels<br /><span className="text-orange-600 italic">Alive.</span>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-[#111111] opacity-70 leading-relaxed max-w-md font-medium px-4 lg:px-0">
@@ -67,40 +67,42 @@ export const LandingPage: React.FC<{ onLaunch: () => void }> = ({ onLaunch }) =>
         </div>
 
         {/* Right Side: The Creature & Floating Browser */}
-        <div className="flex items-center justify-center relative mt-32 lg:mt-0 lg:w-1/2 w-full xl:pl-12">
-          {/* Floating Browser Frame Mockup */}
-          <div className="w-full max-w-xl xl:max-w-[44rem] flex-shrink-0 aspect-[4/3] bg-white/40 backdrop-blur-xl rounded-3xl shadow-[0_45px_100px_-25px_rgba(0,0,0,0.12)] border border-white/60 p-4 flex flex-col gap-4 relative z-10 overflow-hidden transform -rotate-1 hover:rotate-0 transition-transform duration-700">
-            <div className="flex gap-2 mb-2">
-              <div className="w-3 h-3 rounded-full bg-red-400/80"></div>
-              <div className="w-3 h-3 rounded-full bg-amber-400/80"></div>
-              <div className="w-3 h-3 rounded-full bg-green-400/80"></div>
-            </div>
-            <div className="flex-1 bg-gradient-to-b from-zinc-200/40 to-zinc-100/10 rounded-2xl p-6 md:p-8 flex flex-col gap-6 overflow-y-auto border border-white/20">
-              <div className="self-end bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 text-white p-4 rounded-3xl rounded-tr-sm shadow-md text-sm md:text-base font-semibold w-fit max-w-[85%] border border-white/10">
-                Yaar, 8 hours padh liya aaj.
+        <div className="flex items-center justify-center relative mt-24 lg:mt-0 lg:w-1/2 w-full xl:pl-12">
+          <div className="relative w-full max-w-sm sm:max-w-xl xl:max-w-[44rem] px-2 sm:px-0">
+            {/* Floating Browser Frame Mockup */}
+            <div className="w-full aspect-[4/3] bg-white/40 backdrop-blur-xl rounded-3xl shadow-[0_45px_100px_-25px_rgba(0,0,0,0.12)] border border-white/60 p-3 sm:p-4 flex flex-col gap-3 sm:gap-4 overflow-hidden transform -rotate-1 hover:rotate-0 transition-transform duration-700">
+              <div className="flex gap-2">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-400/80"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-amber-400/80"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-green-400/80"></div>
               </div>
-              <div className="self-start flex gap-3 items-end">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 shrink-0 shadow-inner"></div>
-                <div className="bg-gradient-to-br from-white/90 via-white/70 to-white/50 border border-white/60 p-4 rounded-3xl rounded-tl-sm text-sm md:text-base shadow-md w-fit max-w-[85%] backdrop-blur-md text-[#111111]">
-                  <span className="font-bold text-orange-600 mr-2">NIG AI:</span> 
-                  Oho! Proud of you saale! Party kab dega?
+              <div className="flex-1 bg-gradient-to-b from-zinc-200/40 to-zinc-100/10 rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col gap-4 sm:gap-6 overflow-y-auto border border-white/20">
+                <div className="self-end bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 text-white p-3 sm:p-4 rounded-3xl rounded-tr-sm shadow-md text-xs sm:text-sm md:text-base font-semibold w-fit max-w-[85%] border border-white/10">
+                  Yaar, 8 hours padh liya aaj.
+                </div>
+                <div className="self-start flex gap-2 sm:gap-3 items-end">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 shrink-0 shadow-inner"></div>
+                  <div className="bg-gradient-to-br from-white/90 via-white/70 to-white/50 border border-white/60 p-3 sm:p-4 rounded-3xl rounded-tl-sm text-xs sm:text-sm md:text-base shadow-md w-fit max-w-[85%] backdrop-blur-md text-[#111111]">
+                    <span className="font-bold text-orange-600 mr-2">NIG AI:</span> 
+                    Oho! Proud of you saale! Party kab dega?
+                  </div>
+                </div>
+                <div className="self-end bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 text-white p-3 sm:p-4 rounded-3xl rounded-tr-sm shadow-md text-xs sm:text-sm md:text-base font-semibold w-fit max-w-[85%] border border-white/10">
+                  Ab reels dekhne ja raha...
+                </div>
+                <div className="self-start flex gap-2 sm:gap-3 items-end">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 shrink-0 shadow-inner"></div>
+                  <div className="bg-gradient-to-br from-white/90 via-white/70 to-white/50 border border-white/60 p-3 sm:p-4 rounded-3xl rounded-tl-sm text-xs sm:text-sm md:text-base shadow-md italic text-gray-500 w-fit max-w-[85%] backdrop-blur-md">
+                    NIG AI is judging you intensely... 😒
+                  </div>
                 </div>
               </div>
-              <div className="self-end bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 text-white p-4 rounded-3xl rounded-tr-sm shadow-md text-sm md:text-base font-semibold w-fit max-w-[85%] border border-white/10">
-                Ab reels dekhne ja raha...
-              </div>
-              <div className="self-start flex gap-3 items-end">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 shrink-0 shadow-inner"></div>
-                <div className="bg-gradient-to-br from-white/90 via-white/70 to-white/50 border border-white/60 p-4 rounded-3xl rounded-tl-sm text-sm md:text-base shadow-md italic text-gray-500 w-fit max-w-[85%] backdrop-blur-md">
-                  NIG AI is judging you intensely... 😒
-                </div>
-              </div>
             </div>
-          </div>
 
-          {/* The Creature component imported */}
-          <div className="absolute -top-16 lg:-top-24 -right-4 lg:-right-12 z-20">
-             <Creature className="scale-110 md:scale-125 lg:scale-150 transform-origin-bottom" />
+            {/* The Creature component imported */}
+            <div className="absolute -top-12 sm:-top-16 lg:-top-24 right-0 sm:-right-4 lg:-right-12 z-20">
+               <Creature className="scale-90 sm:scale-110 md:scale-125 lg:scale-150 origin-bottom" />
+            </div>
           </div>
 
           {/* Background Decorative Elements */}

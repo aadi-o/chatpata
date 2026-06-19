@@ -53,7 +53,7 @@ export function useChat() {
       };
       addMessage(aiMsg);
       setMood('typing');
-      setIsTyping(false);
+      setIsTyping(true);
 
       const decoder = new TextDecoder();
       let completeResponse = "";
@@ -89,9 +89,72 @@ export function useChat() {
       }
       
       const lowerResp = completeResponse.toLowerCase();
-      if (lowerResp.includes('🥳') || lowerResp.includes('party')) setMood('celebrating');
-      else if (lowerResp.includes('😏') || lowerResp.includes('roast')) setMood('roasting');
-      else setMood('idle');
+      
+      // Analyze response length
+      let lenClass: 'short' | 'medium' | 'long' = 'medium';
+      if (completeResponse.length < 35) {
+        lenClass = 'short';
+      } else if (completeResponse.length > 95) {
+        lenClass = 'long';
+      }
+
+      // Analyze response sentiment
+      let sentClass: 'savage' | 'friendly' | 'chaotic' | 'cool' | 'shocked' = 'cool';
+      
+      if (
+        lowerResp.includes('saala') || 
+        lowerResp.includes('dhakkan') || 
+        lowerResp.includes('gadha') || 
+        lowerResp.includes('ullu') || 
+        lowerResp.includes('kamina') || 
+        lowerResp.includes('fattu') || 
+        lowerResp.includes('savage') || 
+        lowerResp.includes('roast') || 
+        lowerResp.includes('shakl') || 
+        lowerResp.includes('chirkut') ||
+        lowerResp.includes('😏')
+      ) {
+        sentClass = 'savage';
+        setMood('roasting');
+      } else if (
+        lowerResp.includes('💀') || 
+        lowerResp.includes('😭') || 
+        lowerResp.includes('🤡') ||
+        lowerResp.includes('chaos') ||
+        lowerResp.includes('crazy')
+      ) {
+        sentClass = 'chaotic';
+        setMood('chaos');
+      } else if (
+        lowerResp.includes('😊') || 
+        lowerResp.includes('🥳') || 
+        lowerResp.includes('party') ||
+        lowerResp.includes('great') ||
+        lowerResp.includes('proud') ||
+        lowerResp.includes('🤝')
+      ) {
+        sentClass = 'friendly';
+        setMood('happy');
+      } else if (
+        lowerResp.includes('🙄') || 
+        lowerResp.includes('💅') ||
+        lowerResp.includes('whatever') ||
+        lowerResp.includes('cool')
+      ) {
+        sentClass = 'cool';
+        setMood('proud');
+      } else {
+        if (lenClass === 'long') {
+          setMood('sleepy');
+        } else if (lenClass === 'short') {
+          setMood('excited');
+        } else {
+          setMood('idle');
+        }
+      }
+
+      const { setResponseMeta } = useCreatureStore.getState();
+      setResponseMeta(lenClass, sentClass);
 
     } catch (err: any) {
       console.error(err);

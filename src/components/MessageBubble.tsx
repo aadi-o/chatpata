@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { motion } from 'motion/react';
+import { Volume2, VolumeX } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Message } from '../types';
 
@@ -11,6 +12,40 @@ interface MessageBubbleProps {
 
 export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   const isUser = message.role === 'USER';
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
+  const toggleSpeech = () => {
+    if (!window.speechSynthesis) {
+      alert("Speech synthesis is not supported in this browser.");
+      return;
+    }
+
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+    } else {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(message.content);
+      // Try to find a nice human voice if available
+      if (window.speechSynthesis.getVoices) {
+        const voices = window.speechSynthesis.getVoices();
+        const fallbackVoice = voices.find(v => v.lang.includes('en') || v.lang.includes('hi'));
+        if (fallbackVoice) utterance.voice = fallbackVoice;
+      }
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
+      window.speechSynthesis.speak(utterance);
+      setIsSpeaking(true);
+    }
+  };
 
   return (
     <motion.div
@@ -124,12 +159,29 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
           </ReactMarkdown>
         </div>
         
-        {/* Timestamp */}
+        {/* Timestamp & Speak Tool */}
         <div className={cn(
-          "text-[10px] mt-2 font-medium opacity-50 flex items-center justify-end",
-          isUser ? "text-right" : "text-left"
+          "text-[10px] mt-2 font-medium opacity-50 flex items-center justify-between gap-4",
+          isUser ? "text-right justify-end" : "text-left justify-between"
         )}>
-           {new Date(message.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          {!isUser && (
+            <button 
+              onClick={toggleSpeech} 
+              className={cn(
+                "flex items-center gap-1 px-2.5 py-1 rounded-full hover:opacity-100 transition-all border border-black/10 text-[10px] font-bold cursor-pointer relative z-20",
+                isSpeaking 
+                  ? "bg-orange-500/20 text-orange-700 hover:bg-orange-500/30 animate-pulse border-orange-500/30" 
+                  : "bg-black/5 hover:bg-black/10 text-gray-700"
+              )}
+              title={isSpeaking ? "Stop Speaking" : "Speak Response"}
+            >
+              {isSpeaking ? <VolumeX size={11} className="shrink-0" /> : <Volume2 size={11} className="shrink-0" />}
+              <span>{isSpeaking ? "Speaking..." : "Read Aloud"}</span>
+            </button>
+          )}
+          <div>
+            {new Date(message.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </div>
         </div>
       </div>
     </motion.div>
