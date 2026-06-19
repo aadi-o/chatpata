@@ -34,11 +34,41 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
     } else {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(message.content);
-      // Try to find a nice human voice if available
+      // Try to find a nice Indian Hinglish Male voice
       if (window.speechSynthesis.getVoices) {
         const voices = window.speechSynthesis.getVoices();
-        const fallbackVoice = voices.find(v => v.lang.includes('en') || v.lang.includes('hi'));
-        if (fallbackVoice) utterance.voice = fallbackVoice;
+        
+        // Let's filter first for Indian accents (en-IN or hi-IN)
+        const indianVoices = voices.filter(v => v.lang.includes('en-IN') || v.lang.includes('en_IN') || v.lang.includes('hi') || v.lang.includes('HI'));
+        
+        // Find a male Indian voice if possible
+        let selectedVoice = indianVoices.find(v => {
+          const name = v.name.toLowerCase();
+          return name.includes('male') || name.includes('rishi') || name.includes('ravi') || name.includes('heera') || name.includes('prabhat');
+        });
+
+        // Fallback to any Indian voice
+        if (!selectedVoice && indianVoices.length > 0) {
+          selectedVoice = indianVoices[0];
+        }
+
+        // Fallback to any English male voice
+        if (!selectedVoice) {
+          selectedVoice = voices.find(v => {
+            const name = v.name.toLowerCase();
+            const lang = v.lang.toLowerCase();
+            return (lang.includes('en') && (name.includes('male') || name.includes('david') || name.includes('george') || name.includes('mark') || name.includes('guy') || name.includes('microsoft')));
+          });
+        }
+
+        if (selectedVoice) {
+          utterance.voice = selectedVoice;
+        }
+
+        // Set pitch lower (0.85 - 0.9) to simulate a deep, cool, and highly realistic masculine voice
+        const isSelectedMale = selectedVoice && (selectedVoice.name.toLowerCase().includes('male') || selectedVoice.name.toLowerCase().includes('rishi') || selectedVoice.name.toLowerCase().includes('ravi') || selectedVoice.name.toLowerCase().includes('david') || selectedVoice.name.toLowerCase().includes('george'));
+        utterance.pitch = isSelectedMale ? 0.95 : 0.82; // Force masculine profile on general voices
+        utterance.rate = 1.02; // Prompt and natural tempo
       }
       utterance.onend = () => setIsSpeaking(false);
       utterance.onerror = () => setIsSpeaking(false);
