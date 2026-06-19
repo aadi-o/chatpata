@@ -84,7 +84,7 @@ export const Creature: React.FC<{ className?: string }> = ({ className }) => {
       transition={customTransition}
       onClick={() => useCreatureStore.getState().setMood(mood === 'chaos' ? 'idle' : 'chaos')}
     >
-      <div className="relative w-40 h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 select-none">
+      <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 select-none">
         {/* Dynamic Halo Effects */}
         <AnimatePresence>
           {responseSentiment === 'savage' && (
@@ -130,27 +130,27 @@ export const Creature: React.FC<{ className?: string }> = ({ className }) => {
             {/* Shiny highlight */}
             <div className="absolute top-2 left-4 w-1/3 h-1/4 bg-white/20 rounded-full blur-md mix-blend-overlay"></div>
             
-            {/* Eyes - ALWAYS rendered & visible */}
-            <motion.div variants={eyeVariants} animate={mood} className="absolute top-[35%] left-[25%] w-5 h-8 lg:w-6 lg:h-10 bg-[#111111] rounded-full flex items-center justify-center overflow-hidden z-10">
-              <div className="w-2 h-2 bg-white rounded-full translate-y-[-2px] translate-x-[1px]"></div>
+            {/* Eyes - ALWAYS rendered & visible using percentage coordinates */}
+            <motion.div variants={eyeVariants} animate={mood} className="absolute top-[35%] left-[25%] w-[13%] h-[22%] bg-[#111111] rounded-full flex items-center justify-center overflow-hidden z-10">
+              <div className="w-[40%] h-[40%] bg-white rounded-full translate-y-[-10%] translate-x-[10%]"></div>
             </motion.div>
-            <motion.div variants={eyeVariants} animate={mood} className="absolute top-[35%] right-[25%] w-5 h-8 lg:w-6 lg:h-10 bg-[#111111] rounded-full flex items-center justify-center overflow-hidden z-10">
-              <div className="w-2 h-2 bg-white rounded-full translate-y-[-2px] translate-x-[1px]"></div>
+            <motion.div variants={eyeVariants} animate={mood} className="absolute top-[35%] right-[25%] w-[13%] h-[22%] bg-[#111111] rounded-full flex items-center justify-center overflow-hidden z-10">
+              <div className="w-[40%] h-[40%] bg-white rounded-full translate-y-[-10%] translate-x-[10%]"></div>
             </motion.div>
             
-            {/* Mouth - ALWAYS rendered & visible with strong borders */}
+            {/* Mouth - ALWAYS rendered & visible with responsive border size */}
             <motion.div 
               variants={mouthVariants} 
               animate={mood}
-              className="absolute bottom-[30%] left-1/2 -translate-x-1/2 w-10 lg:w-12 h-5 lg:h-6 border-b-4 border-solid border-[#111111] z-10"
+              className="absolute bottom-[30%] left-1/2 -translate-x-1/2 w-[22%] h-[12%] border-b-[3px] md:border-b-4 border-solid border-[#111111] z-10"
             />
             
             {/* Blush */}
             <AnimatePresence>
               {['happy', 'celebrating', 'proud'].includes(mood) && (
                 <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="z-10">
-                  <div className="absolute top-[50%] left-[15%] w-6 h-3 lg:w-8 lg:h-4 bg-red-400/50 rounded-full blur-sm"></div>
-                  <div className="absolute top-[50%] right-[15%] w-6 h-3 lg:w-8 lg:h-4 bg-red-400/50 rounded-full blur-sm"></div>
+                  <div className="absolute top-[52%] left-[12%] w-[18%] h-[8%] bg-red-400/50 rounded-full blur-sm"></div>
+                  <div className="absolute top-[52%] right-[12%] w-[18%] h-[8%] bg-red-400/50 rounded-full blur-sm"></div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -159,17 +159,17 @@ export const Creature: React.FC<{ className?: string }> = ({ className }) => {
             <AnimatePresence>
               {mood === 'sleepy' && (
                 <motion.div 
-                   className="absolute top-4 right-10 text-white font-bold opacity-70 z-10"
-                   animate={{ y: [-10, -30], opacity: [0, 0.7, 0], scale: [0.5, 1.5] }}
+                   className="absolute top-4 right-10 text-white font-bold opacity-70 z-10 text-xs md:text-sm"
+                   animate={{ y: [-10, -25], opacity: [0, 0.7, 0], scale: [0.6, 1.3] }}
                    transition={{ repeat: Infinity, duration: 2 }}
                 >Zzz</motion.div>
               )}
             </AnimatePresence>
         </div>
         
-        {/* Small ears/antennas */}
-        <motion.div animate={{ rotate: mood === 'sad' ? -45 : -15, y: mood === 'sad' ? 5 : 0 }} className={`absolute -top-3 lg:-top-4 left-8 lg:left-10 w-6 h-10 lg:w-8 lg:h-12 bg-gradient-to-t ${gradientClass} rounded-full shadow-lg -z-10 transition-transform`}></motion.div>
-        <motion.div animate={{ rotate: mood === 'sad' ? 45 : 15, y: mood === 'sad' ? 5 : 0 }} className={`absolute -top-3 lg:-top-4 right-8 lg:right-10 w-6 h-10 lg:w-8 lg:h-12 bg-gradient-to-t ${gradientClass} rounded-full shadow-lg -z-10 transition-transform`}></motion.div>
+        {/* Small ears/antennas - Positioned relatively to match main body dynamically */}
+        <motion.div animate={{ rotate: mood === 'sad' ? -45 : -15, y: mood === 'sad' ? 5 : 0 }} className={`absolute -top-[8%] left-[20%] w-[18%] h-[28%] bg-gradient-to-t ${gradientClass} rounded-full shadow-lg -z-10 transition-transform`}></motion.div>
+        <motion.div animate={{ rotate: mood === 'sad' ? 45 : 15, y: mood === 'sad' ? 5 : 0 }} className={`absolute -top-[8%] right-[20%] w-[18%] h-[28%] bg-gradient-to-t ${gradientClass} rounded-full shadow-lg -z-10 transition-transform`}></motion.div>
       </div>
     </motion.div>
   );

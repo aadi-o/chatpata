@@ -76,13 +76,14 @@ export const ChatLayout: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   };
 
   return (
-    <div className="w-full h-screen bg-[#F7F7F5] flex flex-col overflow-hidden font-sans relative">
-      {/* Aurora Glass Blurs */}
-      <div className="absolute top-[-200px] left-[-200px] w-[600px] h-[600px] rounded-full bg-orange-300/15 blur-[120px] pointer-events-none z-0"></div>
-      <div className="absolute bottom-[-200px] right-[-200px] w-[600px] h-[600px] rounded-full bg-amber-200/15 blur-[120px] pointer-events-none z-0"></div>
+    <div className="w-full h-screen bg-[#F6F6F3] flex flex-col overflow-hidden font-sans relative">
+      {/* Aurora Glass Blurs - High intensity for glass refraction */}
+      <div className="absolute top-[-150px] left-[-150px] w-[700px] h-[700px] rounded-full bg-orange-400/20 blur-[130px] pointer-events-none z-0 animate-pulse duration-[12s]"></div>
+      <div className="absolute bottom-[-150px] right-[-140px] w-[700px] h-[700px] rounded-full bg-amber-300/15 blur-[130px] pointer-events-none z-0 animate-pulse duration-[15s]"></div>
+      <div className="absolute top-[35%] left-[30%] w-[500px] h-[500px] rounded-full bg-rose-400/10 blur-[120px] pointer-events-none z-0"></div>
       
       {/* Universal Header */}
-      <div className="flex items-center justify-between p-4 md:px-8 bg-white/40 backdrop-blur-xl z-20 border-b border-white/60 shadow-[0_8px_32px_rgba(31,38,135,0.02)]">
+      <div className="flex items-center justify-between p-4 md:px-8 bg-white/45 backdrop-blur-2xl z-20 border-b border-white/50 shadow-[inset_0_1px_1px_rgba(255,255,255,0.7),0_8px_32px_rgba(0,0,0,0.02)]">
          <div className="flex items-center gap-4 cursor-pointer group" onClick={onBack}>
             <div className="p-2 border border-transparent rounded-full group-hover:bg-gray-100/50 transition-colors">
                <ArrowLeft size={20} className="opacity-60 group-hover:opacity-100 transition-opacity" />
@@ -196,33 +197,41 @@ export const ChatLayout: React.FC<{ onBack: () => void }> = ({ onBack }) => {
            <div className="w-full h-full flex flex-col md:flex-row relative bg-transparent">
              
              {/* Creature Display Side Panel (Desktop) */}
-             <div className="hidden md:flex flex-col items-center justify-center w-[35%] lg:w-[40%] xl:w-[35%] 2xl:w-[30%] bg-white/35 backdrop-blur-xl border-r border-white/40 p-8 lg:p-12 z-20 shadow-[4px_0_30px_rgba(0,0,0,0.02)] relative overflow-hidden">
-                 <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#d1d5db 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
-                 <div className="animate-[bounce_4s_infinite] drop-shadow-xl hover:scale-105 transition-transform duration-500 cursor-pointer relative z-10">
-                     <Creature className="scale-[1.2] lg:scale-[1.4] xl:scale-[1.6]" />
+             <div className="hidden md:flex flex-col items-center justify-center w-[35%] lg:w-[32%] xl:w-[28%] bg-gradient-to-b from-white/45 via-white/20 to-white/5 backdrop-blur-3xl border-r border-white/50 p-8 lg:p-12 z-20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.75),4px_0_40px_rgba(0,0,0,0.03)] relative overflow-hidden">
+                 <div className="absolute inset-0 opacity-[0.12] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#111111 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+                 
+                 {/* Floating color nodes behind the companion for deep glass refraction */}
+                 <div className="absolute bottom-[20%] left-[20%] w-[120px] h-[120px] rounded-full bg-orange-400/20 blur-3xl pointer-events-none -z-10 animate-pulse duration-[6s]"></div>
+                 <div className="absolute top-[30%] right-[10%] w-[140px] h-[140px] rounded-full bg-pink-400/15 blur-3xl pointer-events-none -z-10 animate-pulse duration-[8s]"></div>
+
+                 {/* Perfectly dimensioned container for self-scaling Creature */}
+                 <div className="w-44 h-44 xl:w-52 xl:h-52 flex items-center justify-center relative z-10 transition-transform duration-500 hover:scale-105 drop-shadow-xl">
+                     <Creature />
                  </div>
-                 <div className="mt-16 xl:mt-24 text-center max-w-sm relative z-10">
-                     <h3 className="font-bold text-2xl xl:text-3xl mb-3 text-[#111111] tracking-tight">Your Companion</h3>
-                     <p className="text-sm lg:text-base xl:text-lg text-gray-500 font-medium leading-relaxed">
-                       {personalityMode === 'Auto' ? 'Auto-pilot active. Warning: May switch personalities without notice.' : `${personalityMode} Mode active.`}
+                 <div className="mt-12 text-center max-w-xs relative z-10 font-sans">
+                     <h3 className="font-extrabold text-2xl xl:text-3xl mb-3 text-zinc-950 tracking-tight">Your Companion</h3>
+                     <p className="text-xs xl:text-sm text-zinc-600 font-bold leading-relaxed bg-black/5 px-4 py-2.5 rounded-2xl border border-white/60 shadow-sm backdrop-blur-md">
+                       {personalityMode === 'Auto' ? '🤖 Autopilot active. Warning: May switch personalities without notice.' : `🔥 ${personalityMode} Mode active.`}
                      </p>
                  </div>
              </div>
 
              {/* Creature Header (Mobile) */}
-             <div className="md:hidden flex flex-col items-center justify-center bg-white/25 backdrop-blur-xl pt-5 pb-3 border-b border-white/30 z-20 shadow-sm relative overflow-visible">
-                 <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden" style={{ backgroundImage: 'radial-gradient(#d1d5db 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
-                 <div className="scale-[0.65] origin-center -my-9 hover:scale-[0.7] transition-transform duration-300 relative z-10 overflow-visible">
+             <div className="md:hidden flex flex-col items-center justify-center bg-gradient-to-r from-white/45 to-white/25 backdrop-blur-3xl pt-4 pb-3 border-b border-white/40 z-20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6),0_4px_20px_rgba(0,0,0,0.02)] relative overflow-visible">
+                 <div className="absolute inset-0 opacity-[0.08] pointer-events-none overflow-hidden" style={{ backgroundImage: 'radial-gradient(#111111 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
+                 
+                 {/* Compact scale wrapper for mobile-friendly headers */}
+                 <div className="scale-[0.55] origin-center -my-[28px] py-1 hover:scale-[0.6] transition-transform duration-300 relative z-10 overflow-visible">
                      <Creature />
                  </div>
-                 <div className="text-[10px] uppercase font-bold tracking-widest text-orange-600 mt-2 bg-orange-100/90 px-3 py-1 rounded-full border border-orange-200 relative z-10 shadow-sm">
+                 <div className="text-[10px] uppercase font-bold tracking-widest text-orange-700 mt-2 bg-orange-100/90 px-3 py-1 rounded-full border border-orange-200 relative z-10 shadow-sm">
                     {personalityMode === 'Auto' ? 'Autopilot Active' : `${personalityMode} Mode`}
                  </div>
              </div>
 
              {/* Chat Area */}
-             <div className="flex-1 flex flex-col h-full relative z-10 w-full overflow-hidden bg-white/15 backdrop-blur-xl">
-               <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none opacity-50"></div>
+             <div className="flex-1 flex flex-col h-full relative z-10 w-full overflow-hidden bg-white/10 backdrop-blur-2xl">
+               <div className="absolute inset-0 bg-[radial-gradient(#111111_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none opacity-[0.05]"></div>
                {/* Messages List */}
                <div className="flex-1 overflow-y-auto w-full p-4 md:p-8 scroll-smooth relative z-10">
                  <div className="max-w-3xl lg:max-w-4xl xl:max-w-5xl w-full mx-auto flex flex-col gap-6">
@@ -256,7 +265,7 @@ export const ChatLayout: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                </div>
 
                {/* Input Area */}
-               <div className="w-full p-3 md:p-8 z-20 bg-white/30 backdrop-blur-2xl pb-4 sm:pb-6 md:pb-8 border-t border-white/40 shadow-[0_-10px_40px_rgba(0,0,0,0.02)]">
+               <div className="w-full p-3 md:p-8 z-20 bg-gradient-to-b from-white/45 to-white/15 backdrop-blur-3xl pb-4 sm:pb-6 md:pb-8 border-t border-white/50 shadow-[inset_0_1px_1px_rgba(255,255,255,0.7),0_-10px_45px_rgba(0,0,0,0.02)]">
                   {/* Realistic Typing Indicator directly above the chat input */}
                   <AnimatePresence>
                     {isTyping && (
