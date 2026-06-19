@@ -23,16 +23,69 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
       )}
     >
       {!isUser && (
-        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-100 to-orange-200 border border-orange-300 flex-shrink-0 flex items-center justify-center mt-auto mb-1 shadow-sm">
-          <span className="text-sm font-black text-orange-600">AI</span>
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-100 to-orange-200 border border-orange-300 flex-shrink-0 flex items-center justify-center mt-auto mb-1 shadow-sm relative overflow-visible">
+          <span className="relative w-full h-full flex items-center justify-center">
+            {/* Animated Cat ears */}
+            <motion.div 
+              className="absolute -top-1 left-1.5 w-2.5 h-2.5 bg-orange-400 rounded-tr-[50%] rounded-tl-[80%] rounded-br-[20%] rotate-[-20deg]"
+              animate={{ rotate: [-20, -35, -5, -20] }}
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+            />
+            <motion.div 
+              className="absolute -top-1 right-1.5 w-2.5 h-2.5 bg-orange-400 rounded-tl-[50%] rounded-tr-[80%] rounded-bl-[20%] rotate-[20deg]"
+              animate={{ rotate: [20, 5, 35, 20] }}
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 0.2 }}
+            />
+            {/* Inner pink ears */}
+            <div className="absolute -top-0.5 left-2 w-1.5 h-1.5 bg-pink-300 rounded-tr-[40%] rounded-tl-[70%] rotate-[-20deg]" />
+            <div className="absolute -top-0.5 right-2 w-1.5 h-1.5 bg-pink-300 rounded-tl-[40%] rounded-tr-[70%] rotate-[20deg]" />
+
+            {/* Cat Face SVG */}
+            <svg viewBox="0 0 100 100" className="w-6 h-6 text-orange-700 select-none fill-current mt-0.5 z-10">
+              {/* Cat Eyes */}
+              <motion.ellipse 
+                cx="30" cy="45" rx="6" ry="6" 
+                animate={{ scaleY: [1, 1, 0.1, 1, 1] }}
+                transition={{ repeat: Infinity, duration: 3, times: [0, 0.45, 0.5, 0.55, 1] }}
+              />
+              <motion.ellipse 
+                cx="70" cy="45" rx="6" ry="6" 
+                animate={{ scaleY: [1, 1, 0.1, 1, 1] }}
+                transition={{ repeat: Infinity, duration: 3, times: [0, 0.45, 0.5, 0.55, 1] }}
+              />
+              {/* Nose & Mouth */}
+              <polygon points="50,55 45,50 55,50" className="fill-orange-800" />
+              <path d="M 45 57 Q 50 63 50 57 Q 50 63 55 57" fill="none" strokeWidth="4" strokeLinecap="round" className="stroke-current" />
+              {/* Blushing cheeks */}
+              <motion.ellipse 
+                cx="20" cy="53" rx="6" ry="4" 
+                className="fill-red-400/70"
+                animate={{ opacity: [0.5, 0.8, 0.5] }}
+                transition={{ repeat: Infinity, duration: 2.5 }}
+              />
+              <motion.ellipse 
+                cx="80" cy="53" rx="6" ry="4" 
+                className="fill-red-400/70"
+                animate={{ opacity: [0.5, 0.8, 0.5] }}
+                transition={{ repeat: Infinity, duration: 2.5 }}
+              />
+            </svg>
+            
+            {/* Tiny moving tail */}
+            <motion.div 
+              className="absolute -right-1 bottom-1 w-2 h-3.5 bg-orange-400 rounded-full origin-bottom"
+              animate={{ rotate: [-20, 25, -20] }}
+              transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+            />
+          </span>
         </div>
       )}
       <div 
         className={cn(
-          "max-w-[85%] md:max-w-[75%] p-4 shadow-sm relative overflow-hidden",
+          "max-w-[85%] md:max-w-[75%] p-4 shadow-sm relative overflow-hidden backdrop-blur-md transition-all duration-300",
           isUser 
-            ? "bg-[#111111] text-white rounded-3xl rounded-br-sm shadow-md" 
-            : "bg-white border border-[#EFEFEA] text-[#111111] rounded-3xl rounded-bl-sm shadow-sm"
+            ? "bg-gradient-to-br from-zinc-900/90 via-zinc-900/80 to-[#111]/70 text-white border border-white/10 rounded-3xl rounded-br-sm shadow-[0_8px_32px_rgba(0,0,0,0.15)]" 
+            : "bg-gradient-to-br from-white/75 via-white/50 to-white/30 border border-white/60 text-[#111111] rounded-3xl rounded-bl-sm shadow-[0_8px_32px_rgba(31,38,135,0.04)]"
         )}
       >
         <div className={cn("markdown-body leading-relaxed text-[15px]", isUser && "text-white prose-invert")}>

@@ -4,35 +4,40 @@ import { Creature } from '../components/Creature';
 export const LandingPage: React.FC<{ onLaunch: () => void }> = ({ onLaunch }) => {
   return (
     <div className="w-full min-h-screen bg-[#F7F7F5] text-[#111111] font-sans relative overflow-x-hidden flex flex-col">
+      {/* Aurora Glass Blurs */}
+      <div className="absolute top-[-150px] left-[-150px] w-[600px] h-[600px] rounded-full bg-orange-300/20 blur-[130px] pointer-events-none z-0"></div>
+      <div className="absolute bottom-[-150px] right-[-150px] w-[700px] h-[700px] rounded-full bg-amber-200/25 blur-[140px] pointer-events-none z-0"></div>
+      <div className="absolute top-[30%] right-[10%] w-[450px] h-[450px] rounded-full bg-rose-200/15 blur-[120px] pointer-events-none z-0"></div>
+
       {/* Navigation */}
-      <nav className="px-6 md:px-12 py-8 flex justify-between items-center z-20 relative">
+      <nav className="mx-4 md:mx-12 my-6 px-6 py-4 flex justify-between items-center z-20 relative bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(31,38,135,0.03)]">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-[#111111] rounded-full flex items-center justify-center">
             <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
           </div>
           <span className="font-bold text-xl tracking-tight">
-            ChatPata <span className="text-orange-500 italic">AI</span>
+            NIG <span className="text-orange-500 italic">AI</span>
           </span>
         </div>
         <div className="hidden md:flex gap-10 text-sm font-medium opacity-60 uppercase tracking-widest">
         </div>
         <button 
            onClick={onLaunch}
-           className="px-6 py-2 bg-orange-500 text-white rounded-full text-sm font-bold shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all animate-pulse"
+           className="px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-full text-sm font-bold shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:from-orange-600 hover:to-amber-700 transition-all cursor-pointer"
         >
           Adopt Now
         </button>
       </nav>
 
       {/* Main Hero Content */}
-      <main className="flex-1 flex flex-col lg:flex-row px-6 md:px-12 relative items-center justify-center lg:justify-between pb-12 lg:pb-0 z-10 max-w-[1600px] mx-auto w-full">
+      <main className="flex-1 flex flex-col lg:flex-row px-6 md:px-12 xl:px-24 relative items-center justify-center lg:justify-between pb-12 lg:pb-0 z-10 max-w-[1600px] mx-auto w-full">
         {/* Left Side: Editorial Content */}
-        <div className="flex flex-col justify-center items-center lg:items-start lg:pr-12 lg:w-1/2 pt-4 sm:pt-8 lg:pt-0 text-center lg:text-left">
+        <div className="flex flex-col justify-center items-center lg:items-start lg:pr-12 xl:pr-24 lg:w-1/2 pt-4 sm:pt-8 lg:pt-0 text-center lg:text-left">
           <div className="mb-4 sm:mb-6 inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#EFEFEA] rounded-full shadow-sm w-fit">
             <span className="flex h-2 w-2 rounded-full bg-green-400 animate-pulse"></span>
             <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-tighter">Live: Version 2.0 “The Friend Update”</span>
           </div>
-          <h1 className="text-5xl sm:text-6xl md:text-[80px] lg:text-[112px] leading-[1.05] md:leading-[0.85] font-bold tracking-tighter mb-6 md:mb-8 max-w-2xl">
+          <h1 className="text-5xl sm:text-6xl md:text-[80px] lg:text-[112px] xl:text-[130px] leading-[1.05] md:leading-[0.85] xl:leading-[0.85] font-bold tracking-tighter mb-6 md:mb-8 max-w-2xl xl:max-w-3xl">
             AI That<br />Actually Feels<br /><span className="text-orange-600 italic">Alive.</span>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-[#111111] opacity-70 leading-relaxed max-w-md font-medium px-4 lg:px-0">
@@ -62,32 +67,32 @@ export const LandingPage: React.FC<{ onLaunch: () => void }> = ({ onLaunch }) =>
         </div>
 
         {/* Right Side: The Creature & Floating Browser */}
-        <div className="flex items-center justify-center relative mt-24 lg:mt-0 lg:w-1/2 w-full">
+        <div className="flex items-center justify-center relative mt-32 lg:mt-0 lg:w-1/2 w-full xl:pl-12">
           {/* Floating Browser Frame Mockup */}
-          <div className="w-full max-w-xl xl:max-w-2xl aspect-[4/3] bg-white rounded-3xl shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] border border-[#EFEFEA] p-4 flex flex-col gap-4 relative z-10 overflow-hidden transform -rotate-1 hover:rotate-0 transition-transform duration-700">
+          <div className="w-full max-w-xl xl:max-w-[44rem] flex-shrink-0 aspect-[4/3] bg-white/40 backdrop-blur-xl rounded-3xl shadow-[0_45px_100px_-25px_rgba(0,0,0,0.12)] border border-white/60 p-4 flex flex-col gap-4 relative z-10 overflow-hidden transform -rotate-1 hover:rotate-0 transition-transform duration-700">
             <div className="flex gap-2 mb-2">
-              <div className="w-3 h-3 rounded-full bg-red-400"></div>
-              <div className="w-3 h-3 rounded-full bg-amber-400"></div>
-              <div className="w-3 h-3 rounded-full bg-green-400"></div>
+              <div className="w-3 h-3 rounded-full bg-red-400/80"></div>
+              <div className="w-3 h-3 rounded-full bg-amber-400/80"></div>
+              <div className="w-3 h-3 rounded-full bg-green-400/80"></div>
             </div>
-            <div className="flex-1 bg-[#F7F7F5] rounded-2xl p-6 md:p-8 flex flex-col gap-6 overflow-y-auto">
-              <div className="self-end bg-blue-600 text-white p-4 rounded-3xl rounded-tr-sm shadow-sm text-base font-medium w-fit max-w-[80%]">
+            <div className="flex-1 bg-gradient-to-b from-zinc-200/40 to-zinc-100/10 rounded-2xl p-6 md:p-8 flex flex-col gap-6 overflow-y-auto border border-white/20">
+              <div className="self-end bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 text-white p-4 rounded-3xl rounded-tr-sm shadow-md text-sm md:text-base font-semibold w-fit max-w-[85%] border border-white/10">
                 Yaar, 8 hours padh liya aaj.
               </div>
               <div className="self-start flex gap-3 items-end">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 shrink-0 shadow-inner"></div>
-                <div className="bg-white border border-[#EFEFEA] p-4 rounded-3xl rounded-tl-sm text-base shadow-sm w-fit max-w-[80%]">
-                  <span className="font-bold text-orange-500 mr-2">ChatPata:</span> 
-                  Oho! Proud of you! 🥳 Party kab hai?
+                <div className="bg-gradient-to-br from-white/90 via-white/70 to-white/50 border border-white/60 p-4 rounded-3xl rounded-tl-sm text-sm md:text-base shadow-md w-fit max-w-[85%] backdrop-blur-md text-[#111111]">
+                  <span className="font-bold text-orange-600 mr-2">NIG AI:</span> 
+                  Oho! Proud of you saale! Party kab dega?
                 </div>
               </div>
-              <div className="self-end bg-blue-600 text-white p-4 rounded-3xl rounded-tr-sm shadow-sm text-base font-medium w-fit max-w-[80%]">
+              <div className="self-end bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 text-white p-4 rounded-3xl rounded-tr-sm shadow-md text-sm md:text-base font-semibold w-fit max-w-[85%] border border-white/10">
                 Ab reels dekhne ja raha...
               </div>
               <div className="self-start flex gap-3 items-end">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 shrink-0 shadow-inner"></div>
-                <div className="bg-white border border-[#EFEFEA] p-4 rounded-3xl rounded-tl-sm text-base shadow-sm italic text-gray-500 w-fit max-w-[80%]">
-                  ChatPata is judging you intensely... 😒
+                <div className="bg-gradient-to-br from-white/90 via-white/70 to-white/50 border border-white/60 p-4 rounded-3xl rounded-tl-sm text-sm md:text-base shadow-md italic text-gray-500 w-fit max-w-[85%] backdrop-blur-md">
+                  NIG AI is judging you intensely... 😒
                 </div>
               </div>
             </div>

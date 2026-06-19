@@ -60,7 +60,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
                     type="text" 
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
-                    placeholder="e.g. ChatPata Enjoyer"
+                    placeholder="e.g. NIG AI Enjoyer"
                     className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-orange-500/50 outline-none transition-shadow"
                  />
                  <p className="text-xs text-gray-500">So the creature knows who to roast.</p>

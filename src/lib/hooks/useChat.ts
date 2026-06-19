@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useChatStore } from '../stores/chatStore';
-import { useCreatureStore } from '../stores/creatureStore';
-import { Message } from '../types';
+import { useChatStore } from '../../stores/chatStore';
+import { useCreatureStore } from '../../stores/creatureStore';
+import { Message } from '../../types';
 
 export function useChat() {
   const { messages, addMessage, updateLastMessage, setIsTyping, personalityMode } = useChatStore();
@@ -95,7 +95,7 @@ export function useChat() {
 
     } catch (err: any) {
       console.error(err);
-      setError('Failed to connect to the ChatPata intelligence core.');
+      setError('Failed to connect to the NIG AI intelligence core.');
       setMood('sad');
     } finally {
       setIsTyping(false);
